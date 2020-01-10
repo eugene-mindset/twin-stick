@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stickPortion: {fileID: 788731285149668179}
   gatePortion: {fileID: 788731283951207412}
-  gizmoColor: {r: 0.07876469, g: 0.2830189, b: 0.2770114, a: 1}
+  gizmoColor: {r: 0.012993937, g: 0.03773582, b: 0.014328345, a: 1}
   maxMagnitude: 50
 --- !u!1 &788731285149668189
 GameObject:
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.51450694, g: 0.8829892, b: 0.8867924, a: 0.48235294}
+  m_Color: {r: 0.51450694, g: 0.8829892, b: 0.8867924, a: 0.4}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

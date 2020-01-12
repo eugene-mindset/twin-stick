@@ -103,6 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8430213862203892306}
   - component: {fileID: 721379041571756544}
+  - component: {fileID: 8696092726728456380}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -138,3 +139,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
+  speed: 0
+  lifetime: 0
+  damage: 0
+  hitbox: {fileID: 8696092726728456380}
+  teamID: 0
+--- !u!65 &8696092726728456380
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430213862203892307}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 0.25, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}

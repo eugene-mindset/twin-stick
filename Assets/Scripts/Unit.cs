@@ -19,6 +19,12 @@ public class Unit : MonoBehaviour {
 	public Bullet primaryBulletPrefab;
 	public float primarySpeed;
 	public float primaryLifetime;
+	public float primaryDamage;
+
+	public float maxHealth;
+	public float currHealth;
+
+	public byte teamID;
 
 	// Start is called before the first frame update
 	void Start( ) {
@@ -47,6 +53,8 @@ public class Unit : MonoBehaviour {
 			newBullet.direction = this.aimDirection;
 			newBullet.speed = this.primarySpeed;
 			newBullet.lifetime = this.primaryLifetime;
+			newBullet.teamID = this.teamID;
+			newBullet.damage = this.primaryDamage;
 		}
 	}
 }

@@ -27,12 +27,11 @@ public class Bullet : MonoBehaviour {
 		}
 	}
 
-	private void OnCollisionEnter( Collision collision ) {
-		Debug.Log( "HIT!" );
-		Unit otherUnit = collision.gameObject.GetComponent<Unit>();
+	private void OnTriggerEnter( Collider other ) {
+		Unit otherUnit = other.gameObject.GetComponent<Unit>();
 
-		if ( otherUnit && otherUnit.teamID != this.teamID ) {
-			otherUnit.currHealth -= this.teamID;
+		if (otherUnit && otherUnit.teamID != this.teamID) {
+			otherUnit.currHealth -= this.damage;
 			GameObject.Destroy( this.gameObject );
 		}
 	}

@@ -64,6 +64,7 @@ public class Unit : MonoBehaviour {
 		}
 	}
 
+	//
 	public void FirePrimary( ) {
 		// If off cooldown, fire primary
 		if ( this.primaryWait <= 0 ) {
@@ -74,7 +75,7 @@ public class Unit : MonoBehaviour {
 			Vector3 globalInstatiatePos = this.transform.TransformPoint( this.primaryInstatiateOffset );
 			Bullet newBullet = Instantiate( this.primaryBulletPrefab, globalInstatiatePos, this.transform.rotation );
 
-			// Set bullet information
+			// Set bullet settings
 			newBullet.direction = globalInstatiatePos - this.transform.position;
 			newBullet.speed = this.primarySpeed;
 			newBullet.lifetime = this.primaryLifetime;

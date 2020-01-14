@@ -7,12 +7,13 @@ public class PlayerController : MonoBehaviour {
 
 	public JoystickInput moveInputs;
 	public JoystickInput rotateInputs;
-	public Unit controller;
+	public Unit unit;
 
 	// Update is called once per frame
 	void Update( ) {
-		this.controller.moveDirection = new Vector3( this.moveInputs.InputDirection.x, 0, this.moveInputs.InputDirection.y );
-		this.controller.aimDirection = new Vector3( this.rotateInputs.InputDirection.x, 0, this.rotateInputs.InputDirection.y );
-		this.controller.percentSpeed = this.moveInputs.InputMagnitude;
+		// Apply inputs to the unit the player is in control of
+		this.unit.moveDirection = new Vector3( this.moveInputs.InputDirection.x, 0, this.moveInputs.InputDirection.y );
+		this.unit.aimDirection = new Vector3( this.rotateInputs.InputDirection.x, 0, this.rotateInputs.InputDirection.y );
+		this.unit.percentSpeed = this.moveInputs.InputMagnitude;
 	}
 }

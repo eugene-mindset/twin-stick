@@ -39,34 +39,42 @@ public class Unit : MonoBehaviour {
 
 	// Start is called before the first frame update
 	void Start( ) {
+		// Get rbody
 		this.rbody = this.transform.GetComponent<Rigidbody>();
 	}
 
-	// Update is called once per frame
+	// FixedUpdate is called once per frame for a consistent duration
 	void FixedUpdate( ) {
+		// Update the cooldown of primary attack and the state of moving and aiming
 		this.primaryWait -= Time.fixedDeltaTime;
 		bool aiming = this.aimDirection != Vector3.zero;
 		bool moving = this.moveDirection != Vector3.zero;
 
+		// Update traversal and rotation depending on whether unit is aiming or freely moving
+		// TODO: Fix quaternion stuff, it doesn't play nice unless I freeze certain axes of rotation
 		if ( aiming ) {
 			this.rbody.rotation = Quaternion.Lerp( this.rbody.rotation, Quaternion.LookRotation( this.aimDirection ), this.rotateSpeedWhileAiming );
 			this.rbody.velocity = this.moveDirection * this.terminalSpeedWhileAiming * this.percentSpeed;
+
+			// Fire primary attack automatically when aiming
 			this.FirePrimary();
 		} else if ( moving ) {
 			this.rbody.rotation = Quaternion.Lerp( this.rbody.rotation, Quaternion.LookRotation( this.moveDirection ), this.rotateSpeedWhileMoving );
 			this.rbody.velocity = this.transform.forward * this.terminalSpeedWhileMoving * this.percentSpeed;
 		}
-
-
 	}
 
 	public void FirePrimary( ) {
+		// If off cooldown, fire primary
 		if ( this.primaryWait <= 0 ) {
-			Vector3 globalInstatiatePos = this.transform.TransformPoint( this.primaryInstatiateOffset );
+			// Set cooldown
 			this.primaryWait = this.primaryCooldown;
 
+			// Instatiate new bullet
+			Vector3 globalInstatiatePos = this.transform.TransformPoint( this.primaryInstatiateOffset );
 			Bullet newBullet = Instantiate( this.primaryBulletPrefab, globalInstatiatePos, this.transform.rotation );
 
+			// Set bullet information
 			newBullet.direction = globalInstatiatePos - this.transform.position;
 			newBullet.speed = this.primarySpeed;
 			newBullet.lifetime = this.primaryLifetime;

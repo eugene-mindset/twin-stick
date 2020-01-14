@@ -42,6 +42,7 @@ public class JoystickInput : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 		this.inputMag = magnitude / this.maxMagnitude;
 	}
 
+	// TODO: Gizmo isn't being drawn for some reason?
 	private void OnDrawGizmos( ) {
 		float zOff = Camera.main.nearClipPlane;
 		Vector3 stickPos = new Vector3( this.stickPortion.rectTransform.position.x, this.stickPortion.rectTransform.position.y, zOff );

@@ -66,8 +66,10 @@ public class Unit : MonoBehaviour {
 
 	//
 	public void FirePrimary( ) {
-		// If off cooldown, fire primary
-		if ( this.primaryWait <= 0 ) {
+		// If off cooldown, fire primaryw
+		if ( primaryBulletPrefab == null ) {
+			return;
+		} else if ( this.primaryWait <= 0 ) {
 			// Set cooldown
 			this.primaryWait = this.primaryCooldown;
 

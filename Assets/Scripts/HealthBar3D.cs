@@ -7,14 +7,20 @@ using UnityEngine.UI;
 public class HealthBar3D : MonoBehaviour {
 
 	public Unit unit;
+	public Image backPortion;
 	public Image healthPoriton;
 	public Vector3 offset;
 	public Vector3 size;
 	public float lerpSpeed;
 
+	public Color32 backColor;
+	public Color32 healthColor;
+
 	// Start is called before the first frame update
 	void Start( ) {
 		this.transform.localScale = this.size;
+		this.backPortion.color = this.backColor;
+		this.healthPoriton.color = this.healthColor;
 	}
 
 	// LateUpdate is called once per frame, after game logic is updated

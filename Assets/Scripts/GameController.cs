@@ -20,25 +20,31 @@ public class GameController : MonoBehaviour {
 
 	private float spawnNew = 0;
 
+	public Vector3 cameraOffset;
+
 	private struct GameUnit {
 		public Unit unit;
 		public HealthBar3D healthBar;
+		public IUnitController controller;
 
-		public GameUnit( Unit u, HealthBar3D h ) {
+		public GameUnit( Unit u, HealthBar3D h, IUnitController c ) {
 			this.unit = u;
 			this.healthBar = h;
+			this.controller = c;
 		}
 
 		public GameUnit( Unit u ) {
 			this.unit = u;
 			this.healthBar = Instantiate<GameObject>( healthbarPrefab ).GetComponent<HealthBar3D>();
 			this.healthBar.unit = u;
+			this.controller = null;
 		}
 
 		public GameUnit( GameObject go ) {
 			this.unit = go.GetComponent<Unit>();
 			this.healthBar = Instantiate<GameObject>( healthbarPrefab ).GetComponent<HealthBar3D>();
 			this.healthBar.unit = this.unit;
+			this.controller = null;
 		}
 	}
 
@@ -48,6 +54,7 @@ public class GameController : MonoBehaviour {
 	private void Start( ) {
 		GameController.healthbarPrefab = Resources.Load<GameObject>( "Prefabs/HealthBar3D" );
 		GameController.unitPrefab = Resources.Load<GameObject>( "Prefabs/Unit" );
+		EnemyAI.gameControl = this;
 
 		this.units = new Dictionary<byte, IList<GameUnit>> {
 			[0] = new List<GameUnit> { new GameUnit( this.player.unit ) },
@@ -60,7 +67,7 @@ public class GameController : MonoBehaviour {
 
 	private void FixedUpdate( ) {
 		if ( this.spawnNew <= 0 ) {
-			this.spawnNew = 3;
+			this.spawnNew = 15;
 
 			Vector3 newPosition;
 			newPosition.x = Random.Range( this.beginSpawnRegion.x, this.endSpawnRegion.x );
@@ -70,10 +77,22 @@ public class GameController : MonoBehaviour {
 			GameUnit newEnemy = new GameUnit( Instantiate<GameObject>( unitPrefab, newPosition, Quaternion.identity ) );
 			newEnemy.unit.maxHealth = 25;
 			newEnemy.unit.currHealth = 25;
+
 			newEnemy.unit.teamID = 1;
+
+			newEnemy.unit.terminalSpeedWhileMoving = 4;
+			newEnemy.unit.terminalSpeedWhileAiming = 3;
+			newEnemy.unit.rotateSpeedWhileAiming = 0.1f;
+			newEnemy.unit.rotateSpeedWhileMoving = 0.05f;
+
+			newEnemy.unit.primarySpeed = 15;
+			newEnemy.unit.primaryLifetime = 1;
 
 			newEnemy.healthBar.healthColor = this.secondTeamPrimaryColor;
 			newEnemy.healthBar.backColor = this.secondTeamSecondaryColor;
+
+			newEnemy.controller = newEnemy.unit.gameObject.AddComponent<EnemyAI>();
+			newEnemy.controller.Unit = newEnemy.unit;
 
 			this.units[1].Add( newEnemy );
 			Debug.Log( "New enemy!" );
@@ -84,4 +103,12 @@ public class GameController : MonoBehaviour {
 		// clean up dead enemy units
 	}
 
+	private void LateUpdate( ) {
+		Camera.main.transform.position = this.player.transform.position; //		+ this.cameraOffset;
+		Debug.Log( this.player.transform.position );
+	}
+
+	public Unit GetPlayer( ) {
+		return this.player.unit;
+	}
 }

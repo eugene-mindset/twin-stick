@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour, IUnitController {
 
 	public JoystickInput moveInputs;
 	public JoystickInput rotateInputs;
+	
 	public Unit unit;
+	public Unit Unit { get => this.unit; set => this.unit = value; }
 
 	// Update is called once per frame
 	void Update( ) {

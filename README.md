@@ -13,7 +13,7 @@ Goals for the next week include...
 - (Major) When dealing damage, have a number show the amount of damage they lossed and it hop off
 - (Major) When you tap on a unit, have a UI in the corner display its stats
 - (Major) Have the main HUD display unit health, information, and skills
-- (Minor) Switch bullets from having a lifetime to having a max travel distance
+- ~~(Minor) Switch bullets from having a lifetime to having a max travel distance~~ Having a life time would be useful in cases where trajectories are not straight lines. Can easily calculate the range of a bullet.
 - (Minor) Figure out the Quaternion problem with unit rotation
 - (Minor) Add text to health bar UI to display amount of hit points left
 

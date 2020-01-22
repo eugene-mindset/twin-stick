@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
 
 	public static GameObject healthbarPrefab;
 	public static GameObject unitPrefab;
+	public static Bullet bulletPrefab;
 
 	public Color32 firstTeamPrimaryColor;
 	public Color32 firstTeamPSecondaryColor;
@@ -54,6 +55,8 @@ public class GameController : MonoBehaviour {
 	private void Start( ) {
 		GameController.healthbarPrefab = Resources.Load<GameObject>( "Prefabs/HealthBar3D" );
 		GameController.unitPrefab = Resources.Load<GameObject>( "Prefabs/Unit" );
+		GameController.bulletPrefab = Resources.Load<Bullet>( "Prefabs/Bullet" );
+
 		EnemyAI.gameControl = this;
 
 		this.units = new Dictionary<byte, IList<GameUnit>> {
@@ -67,7 +70,7 @@ public class GameController : MonoBehaviour {
 
 	private void FixedUpdate( ) {
 		if ( this.spawnNew <= 0 ) {
-			this.spawnNew = 15;
+			this.spawnNew = 5;
 
 			Vector3 newPosition;
 			newPosition.x = Random.Range( this.beginSpawnRegion.x, this.endSpawnRegion.x );
@@ -87,6 +90,10 @@ public class GameController : MonoBehaviour {
 
 			newEnemy.unit.primarySpeed = 15;
 			newEnemy.unit.primaryLifetime = 1;
+			newEnemy.unit.primaryCooldown = 1;
+			newEnemy.unit.primaryWait = 1;
+			newEnemy.unit.primaryDamage = 1;
+			newEnemy.unit.primaryBulletPrefab = bulletPrefab;
 
 			newEnemy.healthBar.healthColor = this.secondTeamPrimaryColor;
 			newEnemy.healthBar.backColor = this.secondTeamSecondaryColor;
@@ -104,8 +111,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	private void LateUpdate( ) {
-		Camera.main.transform.position = this.player.transform.position; //		+ this.cameraOffset;
-		Debug.Log( this.player.transform.position );
+		Camera.main.transform.position = this.player.unit.transform.position + this.cameraOffset;
 	}
 
 	public Unit GetPlayer( ) {

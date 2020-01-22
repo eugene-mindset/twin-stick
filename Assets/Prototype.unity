@@ -403,7 +403,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.23046875, y: 0.02734375, z: -0.0390625, w: 0}
+  m_BoundingSphereOverride: {x: 3.67342e-40, y: 1.377532e-39, z: 9.1835e-41, w: 1.8e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -566,8 +566,8 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 0}
   aimDirection: {x: 0, y: 0, z: 0}
   percentSpeed: 0
-  terminalSpeedWhileMoving: 5
-  terminalSpeedWhileAiming: 1.5
+  terminalSpeedWhileMoving: 7.5
+  terminalSpeedWhileAiming: 5
   rotateSpeedWhileMoving: 0.4
   rotateSpeedWhileAiming: 0.7
   primaryLifetime: 2
@@ -1174,5 +1174,5 @@ MonoBehaviour:
     rgba: 4280886633
   beginSpawnRegion: {x: -10, y: 1, z: -10}
   endSpawnRegion: {x: 10, y: 1, z: 10}
-  cameraOffset: {x: 0, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 10, z: -10}
   player: {fileID: 2046341966}
